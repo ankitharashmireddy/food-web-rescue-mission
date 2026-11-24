@@ -150,6 +150,8 @@ window.FWR_APP = (() => {
       "ecosystem-protector": !!missions.emergency.done,
       "energy-expert": !!missions.energy.done && (Number(missions.energy.best) || 0) >= 20,
       "ecosystem-guardian": !!(missions.web.done && missions.emergency.done && missions.energy.done),
+      "perfect-score": totalScore() === MAX_SCORE,
+      "nature-saver": !!(missions.web.done && missions.emergency.done && missions.energy.done && Number(state.progress.health || 0) >= 100),
     };
   }
 

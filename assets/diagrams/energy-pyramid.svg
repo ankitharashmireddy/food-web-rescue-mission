@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" role="img" aria-label="Energy pyramid">
+  <rect width="520" height="340" rx="24" fill="#fffaf0"/>
+  <g font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <polygon points="90,280 430,280 380,225 140,225" fill="#e8f3e8" stroke="#2e7d32" stroke-width="3"/>
+    <text x="260" y="258" fill="#2b2a24">Producers · 10,000 J</text>
+    <polygon points="140,225 380,225 335,170 185,170" fill="#dcebd6" stroke="#2e7d32" stroke-width="3"/>
+    <text x="260" y="203" fill="#2b2a24">Primary · 1,000 J</text>
+    <polygon points="185,170 335,170 295,115 225,115" fill="#f0e3c8" stroke="#b7791f" stroke-width="3"/>
+    <text x="260" y="148" fill="#2b2a24">Secondary · 100 J</text>
+    <polygon points="225,115 295,115 265,60 255,60" fill="#fdecea" stroke="#c0392b" stroke-width="3"/>
+    <text x="260" y="94" fill="#2b2a24">Tertiary · 10 J</text>
+  </g>
+  <text x="260" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#6b6350">About 10% of energy moves to the next level</text>
+</svg>

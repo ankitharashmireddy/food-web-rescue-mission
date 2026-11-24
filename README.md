@@ -14,8 +14,9 @@ Everything runs from local files. The game makes **no network requests**, uses *
 ## Technology
 
 - **HTML5** — nine-screen single-page interface
-- **CSS3** — hand-written design system in `styles.css`
+- **CSS3** — hand-written warm woodland design system in `styles.css`
 - **JavaScript (ES2020)** — vanilla JS, no framework or build tooling
+- **SVG** — local diagrams and icons in `assets/`
 
 > Tailwind CSS is intentionally **not** used: the project must work offline from plain files with no npm/CDN dependency. The utility-style consistency Tailwind would provide is handled by CSS custom properties and reusable component classes.
 
@@ -61,6 +62,21 @@ The dashboard and Settings → Skills let you add **any number of skills** (no f
 | `skills.js`, `settings.js`, `boot.js` | Skills, settings modal, global events |
 | `PROJECT_CONTEXT.md` | Living project context for future updates |
 | `.env`, `.env.example`, `.gitignore`, `requirements.txt` | Project configuration files |
+
+## Asset folders
+
+| Folder | Contents |
+| --- | --- |
+| `assets/backgrounds/` | Welcome, learning, explorer and emergency background artwork |
+| `assets/organisms/` | Organism illustrations |
+| `assets/badges/` | Badge artwork |
+| `assets/diagrams/` | SVG food chain, food web, energy pyramid, nutrient cycle and population graph |
+| `assets/icons/` | SVG interface icons |
+| `assets/ui/` | Logo and UI artwork |
+| `assets/sounds/` | Sound mapping; audio is generated with the Web Audio API |
+| `assets/effects/` | Sparkle, star and confetti artwork |
+| `assets/fonts/` | Font notes; system fonts are used |
+| `assets/inspiration/` | Supplied inspiration images, not used at runtime |
 
 ## Version control
 

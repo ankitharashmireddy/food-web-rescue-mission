@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" role="img" aria-label="Food chain: grass to grasshopper to frog to snake">
+  <rect width="760" height="220" rx="24" fill="#fffaf0"/>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#2b2a24" text-anchor="middle">
+    <circle cx="110" cy="110" r="54" fill="#e8f3e8" stroke="#2e7d32" stroke-width="4"/>
+    <text x="110" y="116">Grass</text>
+    <circle cx="285" cy="110" r="54" fill="#eef5e6" stroke="#2e7d32" stroke-width="4"/>
+    <text x="285" y="116">Grasshopper</text>
+    <circle cx="460" cy="110" r="54" fill="#fdecea" stroke="#c0392b" stroke-width="4"/>
+    <text x="460" y="116">Frog</text>
+    <circle cx="635" cy="110" r="54" fill="#fff1d6" stroke="#b7791f" stroke-width="4"/>
+    <text x="635" y="116">Snake</text>
+  </g>
+  <g stroke="#4b3a2f" stroke-width="4" fill="#4b3a2f">
+    <line x1="164" y1="110" x2="228" y2="110"/>
+    <polygon points="228,102 244,110 228,118"/>
+    <line x1="339" y1="110" x2="403" y2="110"/>
+    <polygon points="403,102 419,110 403,118"/>
+    <line x1="514" y1="110" x2="578" y2="110"/>
+    <polygon points="578,102 594,110 578,118"/>
+  </g>
+  <text x="380" y="190" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#6b6350">Energy flows from food to consumer</text>
+</svg>

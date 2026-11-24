@@ -41,6 +41,8 @@
       renderExplorerCanvas();
     } else if (tab === "populations") {
       content.innerHTML = populationsMarkup();
+    } else if (tab === "other") {
+      content.innerHTML = otherChainsMarkup();
     } else {
       content.innerHTML = whatIfMarkup();
       const toggle = $("#explorerSnakeToggle");
@@ -168,6 +170,38 @@
           <p class="muted small">In this simplified model, the rabbit increase raises grazing pressure on grass more than the grasshopper decline reduces it.</p>
           ${action}
         </aside>
+      </div>
+    `;
+  }
+
+  function otherChainsMarkup() {
+    const chains = (D.EXTRA_CHAINS || []).map((chain) => `
+      <div class="chain-card">
+        <h3>${A.escapeHtml(chain.title)}</h3>
+        <p class="chain-text">${A.escapeHtml(chain.chain)}</p>
+        <p class="muted small">${A.escapeHtml(chain.note)}</p>
+      </div>
+    `).join("");
+
+    const organisms = (D.EXTRA_ORGANISMS || []).map((organism) => `
+      <span class="chip">${organism.emoji} ${A.escapeHtml(organism.name)}</span>
+    `).join("");
+
+    return `
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">More food chains</p>
+            <h3>Other ecosystems follow the same rules</h3>
+          </div>
+          <span class="status-pill positive">New examples</span>
+        </div>
+        <div class="chain-grid">${chains}</div>
+        <div class="lesson-section">
+          <h4>Extra organisms</h4>
+          <div class="chip-row">${organisms}</div>
+        </div>
+        <p class="muted small">These examples are for learning. The assessed Mission 1 web keeps its original seven links.</p>
       </div>
     `;
   }

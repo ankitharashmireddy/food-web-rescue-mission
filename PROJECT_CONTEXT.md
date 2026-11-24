@@ -15,7 +15,8 @@ Build a complete offline static website for Class 12 Biology (Ecosystem): a game
 - All visuals are inline emoji, CSS, or generated SVG.
 - Local Storage key: `fwr_state_v1`. State shape: `{ version, settings, skills, progress }`.
 - Green = correct/positive; red = wrong/negative. Avoid multicolour gradients.
-- Standard system fonts; one primary green accent plus red/amber for feedback.
+- Warm woodland palette: parchment backgrounds, bark-brown panels, leaf greens, sunlight amber.
+- Standard system fonts; local SVG icons and diagrams in `assets/`.
 - Skill input must accept **any number** of skills.
 
 ## 3. Architecture
@@ -62,6 +63,10 @@ Difficulty affects Mission 1 hints only: guided ∞, standard 3, expert 0.
 
 Implemented and browser-tested locally at `http://127.0.0.1:8123/`:
 
+- Warm woodland theme replaces the earlier dark green/black theme.
+- Asset folder structure added under `assets/`, with SVG diagrams/icons and inspiration images.
+- Extra food chains added as an Explorer learning module.
+- Six badges, including Perfect Score and Nature Saver.
 - All nine screens render; no console errors.
 - Mission 1: all seven connections scored 70/70; reversed pair shows −3 feedback; replay/hints work.
 - Mission 2: correct prediction scored 30; cascade chart and badges unlock correctly.

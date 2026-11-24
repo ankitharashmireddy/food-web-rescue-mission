@@ -108,6 +108,24 @@ window.FWR = (() => {
 
   const EDGE_PAIRS = new Set(EDGES.map((edge) => `${edge.source}>${edge.target}`));
 
+  const EXTRA_ORGANISMS = [
+    { id: "leaf-litter", name: "Leaf litter", emoji: "🍂", role: "Dead organic matter", food: "Fallen leaves and debris" },
+    { id: "earthworm", name: "Earthworm", emoji: "🪱", role: "Detritivore", food: "Leaf litter and soil" },
+    { id: "mouse", name: "Mouse", emoji: "🐁", role: "Primary consumer", food: "Grass and seeds" },
+    { id: "hawk", name: "Hawk", emoji: "🦅", role: "Apex consumer", food: "Mice and small birds" },
+    { id: "algae", name: "Algae", emoji: "🫧", role: "Producer", food: "Sunlight and nutrients" },
+    { id: "zooplankton", name: "Zooplankton", emoji: "🦐", role: "Primary consumer", food: "Algae" },
+    { id: "fish", name: "Fish", emoji: "🐟", role: "Secondary consumer", food: "Zooplankton" },
+    { id: "shark", name: "Shark", emoji: "🦈", role: "Apex consumer", food: "Fish" },
+  ];
+
+  const EXTRA_CHAINS = [
+    { id: "forest-floor", title: "Forest floor", chain: "🍂 Leaf litter → 🪱 Earthworm → 🐦 Bird → 🦅 Hawk", note: "Decomposition starts the chain and returns nutrients to the soil." },
+    { id: "grassland-variant", title: "Grassland variant", chain: "🌿 Grass → 🐁 Mouse → 🦅 Hawk", note: "A shorter chain that still ends at an apex consumer." },
+    { id: "pond-sea", title: "Pond / sea", chain: "🫧 Algae → 🦐 Zooplankton → 🐟 Fish → 🦈 Shark", note: "Aquatic food chains follow the same energy rules." },
+    { id: "decomposition", title: "Decomposition", chain: "🍂 Dead matter → 🍄 Fungi / 🦠 Bacteria → 🌿 Grass", note: "Decomposers recycle matter back to producers." },
+  ];
+
   const CASCADE = [
     {
       id: "snake",
@@ -522,6 +540,8 @@ window.FWR = (() => {
     { id: "ecosystem-protector", name: "Ecosystem Protector", emoji: "🛡️", description: "Completed Mission 2." },
     { id: "energy-expert", name: "Energy Expert", emoji: "⚡", description: "Scored at least 2/3 in Mission 3." },
     { id: "ecosystem-guardian", name: "Ecosystem Guardian", emoji: "🏆", description: "Completed all three missions." },
+    { id: "perfect-score", name: "Perfect Score", emoji: "💯", description: "Scored the maximum 130 points." },
+    { id: "nature-saver", name: "Nature Saver", emoji: "🌱", description: "Restored the ecosystem to 100% health." },
   ];
 
   const MISSION_META = {
@@ -551,6 +571,8 @@ window.FWR = (() => {
     ORGANISM_BY_ID,
     EDGES,
     EDGE_PAIRS,
+    EXTRA_ORGANISMS,
+    EXTRA_CHAINS,
     CASCADE,
     CASCADE_BY_ID,
     EMERGENCY_OPTIONS,

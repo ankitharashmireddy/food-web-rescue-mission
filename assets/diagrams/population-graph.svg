@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 300" role="img" aria-label="Population change after snake removal">
+  <rect width="620" height="300" rx="24" fill="#fffaf0"/>
+  <g stroke="#b9a57a" stroke-width="2">
+    <line x1="70" y1="240" x2="560" y2="240"/>
+    <line x1="70" y1="60" x2="70" y2="240"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#6b6350">
+    <text x="315" y="270" text-anchor="middle">Organism</text>
+    <text x="35" y="150" text-anchor="middle" transform="rotate(-90 35 150)">Population index</text>
+  </g>
+  <g>
+    <rect x="95" y="140" width="48" height="100" fill="#e8f3e8" stroke="#2e7d32"/>
+    <rect x="165" y="95" width="48" height="145" fill="#e8f3e8" stroke="#2e7d32"/>
+    <rect x="235" y="100" width="48" height="140" fill="#e8f3e8" stroke="#2e7d32"/>
+    <rect x="305" y="178" width="48" height="62" fill="#fdecea" stroke="#c0392b"/>
+    <rect x="375" y="166" width="48" height="74" fill="#fdecea" stroke="#c0392b"/>
+    <rect x="445" y="149" width="48" height="91" fill="#fff1d6" stroke="#b7791f"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2b2a24">
+    <text x="119" y="258">Snake</text>
+    <text x="189" y="258">Frog</text>
+    <text x="259" y="258">Rabbit</text>
+    <text x="329" y="258">Grasshopper</text>
+    <text x="399" y="258">Grass</text>
+    <text x="469" y="258">Eagle</text>
+  </g>
+</svg>
