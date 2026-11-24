@@ -2,6 +2,14 @@
 
 A playable offline HTML5 Canvas adventure game for Class 11/12 Biology. Explore ecosystems, discover organisms, rebuild food chains, solve energy puzzles and restore ecosystem stability.
 
+## How to run the game
+
+1. Open `index.html` in Chrome, Edge or Firefox.
+2. Or run a local server:
+   - `py -m http.server 8123`
+   - Visit `http://127.0.0.1:8123/`
+3. Click **Start Adventure**, choose a world, and use **WASD / Arrow keys**.
+
 ## How to play
 
 - Move with WASD or arrow keys.

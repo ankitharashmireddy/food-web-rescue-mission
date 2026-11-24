@@ -52,8 +52,8 @@
     {
       id: "grassland",
       name: "Grassland Kingdom",
-      bg: "#071a22",
-      accent: "#4dd0e1",
+      bg: "#0f172a",
+      accent: "#5eead4",
       sky: "#f4efe3",
       organisms: [
         { id: "grass", name: "Grass", emoji: "🌿", tier: "T1 Producer", food: "Sunlight, water and minerals", x: 360, y: 320 },
@@ -87,8 +87,8 @@
     {
       id: "forest",
       name: "Forest Realm",
-      bg: "#071a22",
-      accent: "#4dd0e1",
+      bg: "#0f172a",
+      accent: "#5eead4",
       sky: "#f4efe3",
       organisms: [
         { id: "leaves", name: "Leaf litter", emoji: "🍂", tier: "Producer matter", food: "Fallen leaves", x: 340, y: 320 },
@@ -121,8 +121,8 @@
     {
       id: "freshwater",
       name: "Freshwater World",
-      bg: "#071a22",
-      accent: "#4dd0e1",
+      bg: "#0f172a",
+      accent: "#5eead4",
       sky: "#eef7fa",
       organisms: [
         { id: "algae", name: "Algae", emoji: "🫧", tier: "T1 Producer", food: "Sunlight and nutrients", x: 340, y: 320 },
@@ -155,8 +155,8 @@
     {
       id: "marine",
       name: "Marine Kingdom",
-      bg: "#071a22",
-      accent: "#4dd0e1",
+      bg: "#0f172a",
+      accent: "#5eead4",
       sky: "#eaf6fb",
       organisms: [
         { id: "kelp", name: "Kelp", emoji: "🌿", tier: "T1 Producer", food: "Sunlight and nutrients", x: 340, y: 320 },
@@ -415,7 +415,7 @@
       ctx.fillText(org.emoji, org.x, org.y);
       ctx.globalAlpha = 1;
       ctx.font = "bold 13px Segoe UI, sans-serif";
-      ctx.fillStyle = "#e0f7fa";
+      ctx.fillStyle = "#f8fafc";
       ctx.fillText(org.name, org.x, org.y + 42);
       if (collected) {
         ctx.font = "bold 12px Segoe UI, sans-serif";
