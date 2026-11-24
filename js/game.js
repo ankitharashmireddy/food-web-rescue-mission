@@ -52,8 +52,8 @@
     {
       id: "grassland",
       name: "Grassland Kingdom",
-      bg: "#e8f3e8",
-      accent: "#2e7d32",
+      bg: "#071a22",
+      accent: "#4dd0e1",
       sky: "#f4efe3",
       organisms: [
         { id: "grass", name: "Grass", emoji: "🌿", tier: "T1 Producer", food: "Sunlight, water and minerals", x: 360, y: 320 },
@@ -87,8 +87,8 @@
     {
       id: "forest",
       name: "Forest Realm",
-      bg: "#eef5e6",
-      accent: "#1f5e24",
+      bg: "#071a22",
+      accent: "#4dd0e1",
       sky: "#f4efe3",
       organisms: [
         { id: "leaves", name: "Leaf litter", emoji: "🍂", tier: "Producer matter", food: "Fallen leaves", x: 340, y: 320 },
@@ -121,8 +121,8 @@
     {
       id: "freshwater",
       name: "Freshwater World",
-      bg: "#e6f3f7",
-      accent: "#1f6f8b",
+      bg: "#071a22",
+      accent: "#4dd0e1",
       sky: "#eef7fa",
       organisms: [
         { id: "algae", name: "Algae", emoji: "🫧", tier: "T1 Producer", food: "Sunlight and nutrients", x: 340, y: 320 },
@@ -155,8 +155,8 @@
     {
       id: "marine",
       name: "Marine Kingdom",
-      bg: "#e3f1f7",
-      accent: "#17607d",
+      bg: "#071a22",
+      accent: "#4dd0e1",
       sky: "#eaf6fb",
       organisms: [
         { id: "kelp", name: "Kelp", emoji: "🌿", tier: "T1 Producer", food: "Sunlight and nutrients", x: 340, y: 320 },
@@ -415,7 +415,7 @@
       ctx.fillText(org.emoji, org.x, org.y);
       ctx.globalAlpha = 1;
       ctx.font = "bold 13px Segoe UI, sans-serif";
-      ctx.fillStyle = "#2b2a24";
+      ctx.fillStyle = "#e0f7fa";
       ctx.fillText(org.name, org.x, org.y + 42);
       if (collected) {
         ctx.font = "bold 12px Segoe UI, sans-serif";
@@ -502,32 +502,124 @@
 
   function drawTitleBackground() {
     const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#74c8e8");
-    g.addColorStop(0.42, "#cceba5");
-    g.addColorStop(1, "#63a94f");
+    g.addColorStop(0, "#6fc5ea");
+    g.addColorStop(0.46, "#e4d88f");
+    g.addColorStop(0.47, "#72a94d");
+    g.addColorStop(1, "#4c913d");
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = "rgba(255,255,255,.78)";
+
+    ctx.fillStyle = "rgba(255,255,255,.86)";
     for (let i = 0; i < 8; i++) {
-      const x = (i * 211 + 100) % (W + 100);
-      const y = 55 + (i % 3) * 24;
-      ctx.beginPath(); ctx.arc(x, y, 26, 0, Math.PI * 2); ctx.arc(x + 28, y - 8, 34, 0, Math.PI * 2); ctx.arc(x + 58, y, 24, 0, Math.PI * 2); ctx.fill();
+      const x = (i * 217 + 90) % (W + 120);
+      const y = 82 + (i % 3) * 34;
+      ctx.beginPath();
+      ctx.arc(x, y, 25, 0, Math.PI * 2);
+      ctx.arc(x + 28, y - 10, 34, 0, Math.PI * 2);
+      ctx.arc(x + 58, y, 24, 0, Math.PI * 2);
+      ctx.fill();
     }
-    ctx.fillStyle = "rgba(87,139,72,.58)";
+
+    ctx.fillStyle = "#9a9e63";
     ctx.beginPath();
-    ctx.moveTo(0, H * .50); ctx.quadraticCurveTo(W * .18,H*.34,W*.38,H*.53); ctx.quadraticCurveTo(W*.62,H*.30,W*.82,H*.52); ctx.quadraticCurveTo(W*.92,H*.42,W,H*.48); ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.fill();
-    ctx.fillStyle = "#6bb85d";
+    ctx.moveTo(0, H * .43);
+    ctx.lineTo(W * .12, H * .30);
+    ctx.lineTo(W * .20, H * .38);
+    ctx.lineTo(W * .33, H * .22);
+    ctx.lineTo(W * .45, H * .39);
+    ctx.lineTo(W * .58, H * .25);
+    ctx.lineTo(W * .72, H * .40);
+    ctx.lineTo(W * .86, H * .28);
+    ctx.lineTo(W, H * .40);
+    ctx.lineTo(W, H * .56);
+    ctx.lineTo(0, H * .56);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.42)";
+    ctx.beginPath();
+    ctx.moveTo(W * .33, H * .22);
+    ctx.lineTo(W * .28, H * .34);
+    ctx.lineTo(W * .36, H * .30);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = "#78ad55";
+    ctx.beginPath();
+    ctx.moveTo(0, H * .50);
+    ctx.quadraticCurveTo(W * .18, H * .38, W * .38, H * .51);
+    ctx.quadraticCurveTo(W * .62, H * .34, W * .82, H * .49);
+    ctx.quadraticCurveTo(W * .92, H * .40, W, H * .48);
+    ctx.lineTo(W, H);
+    ctx.lineTo(0, H);
+    ctx.fill();
+
+    ctx.fillStyle = "#62a84b";
     ctx.beginPath(); ctx.moveTo(0,H*.58);ctx.quadraticCurveTo(W*.22,H*.44,W*.43,H*.60);ctx.quadraticCurveTo(W*.68,H*.44,W,H*.56);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
-    ctx.fillStyle = "rgba(126,177,83,.38)";
-    for (let i=0;i<18;i++){ctx.beginPath();ctx.arc((i*173)%W,H*.82+(i%4)*18,70+(i%3)*18,0,Math.PI*2);ctx.fill();}
+
+    ctx.fillStyle = "#77bdd1";
+    ctx.beginPath();
+    ctx.moveTo(W * .57, H * .52);
+    ctx.bezierCurveTo(W * .64, H * .66, W * .54, H * .74, W * .68, H);
+    ctx.lineTo(W * .82, H);
+    ctx.bezierCurveTo(W * .68, H * .77, W * .75, H * .65, W * .64, H * .52);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,.62)";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(W * .60, H * .56);
+    ctx.bezierCurveTo(W * .67, H * .68, W * .58, H * .78, W * .73, H);
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(54,111,45,.42)";
+    for (let i = 0; i < 24; i++) {
+      const x = (i * 137) % W;
+      const y = H * (.70 + (i % 4) * .055);
+      ctx.beginPath();
+      ctx.ellipse(x, y, 18 + (i % 3) * 7, 48 + (i % 4) * 8, (i % 2 ? .3 : -.3), 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawTree(x, y, scale) {
+      ctx.fillStyle = "#76502c";
+      ctx.fillRect(x - 7 * scale, y - 50 * scale, 14 * scale, 50 * scale);
+      ctx.fillStyle = "#2f7738";
+      ctx.beginPath(); ctx.arc(x, y - 62 * scale, 30 * scale, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x - 18 * scale, y - 48 * scale, 24 * scale, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 19 * scale, y - 48 * scale, 26 * scale, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#63a94f";
+      ctx.beginPath(); ctx.arc(x - 7 * scale, y - 72 * scale, 20 * scale, 0, Math.PI * 2); ctx.fill();
+    }
+    drawTree(W * .08, H * .55, Math.max(.75, H / 700));
+    drawTree(W * .91, H * .57, Math.max(.72, H / 720));
+
     ctx.font = "54px Segoe UI Emoji, Apple Color Emoji, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("🌳",(W*.08),(H*.48)); ctx.fillText("🌳",(W*.92),(H*.43));
-    ctx.fillText("🦅",(W*.72),(H*.25));
-    ctx.globalAlpha=.75; ctx.font="28px Segoe UI Emoji, Apple Color Emoji, sans-serif";
-    for(let i=0;i<10;i++)ctx.fillText(i%2?"🌿":"🍃",(i*157+70)%W,H*.67+(i%3)*38);
+    ctx.fillText("🦅", W * .74, H * .26);
+
+    ctx.globalAlpha = .75;
+    ctx.font = "34px Segoe UI Emoji, Apple Color Emoji, sans-serif";
+    for (let i = 0; i < 12; i++) ctx.fillText(i % 2 ? "🌿" : "🌾", (i * 145 + 70) % W, H * (.68 + (i % 3) * .055));
     ctx.globalAlpha = 1;
+
+    const px = W * .54;
+    const py = H * .60;
+    ctx.fillStyle = "rgba(42,67,31,.22)";
+    ctx.beginPath(); ctx.ellipse(px, py + 78, 34, 9, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#5d4028";
+    ctx.beginPath(); ctx.moveTo(px - 19, py + 34); ctx.lineTo(px - 25, py + 70); ctx.lineTo(px - 8, py + 70); ctx.lineTo(px - 3, py + 36); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(px + 12, py + 34); ctx.lineTo(px + 20, py + 70); ctx.lineTo(px + 35, py + 70); ctx.lineTo(px + 23, py + 31); ctx.fill();
+    ctx.fillStyle = "#3d6e40";
+    ctx.beginPath(); ctx.moveTo(px - 28, py - 12); ctx.quadraticCurveTo(px - 42, py + 30, px - 18, py + 48); ctx.lineTo(px + 25, py + 48); ctx.quadraticCurveTo(px + 43, py + 20, px + 25, py - 10); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#d59a6a";
+    ctx.beginPath(); ctx.arc(px, py - 28, 18, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#4b3528";
+    ctx.beginPath(); ctx.moveTo(px - 17, py - 38); ctx.quadraticCurveTo(px, py - 62, px + 18, py - 38); ctx.lineTo(px + 14, py - 27); ctx.lineTo(px - 15, py - 27); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#2c4431";
+    ctx.beginPath(); ctx.arc(px + 8, py - 29, 2.2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#c58a37";
+    ctx.beginPath(); ctx.moveTo(px - 18, py - 11); ctx.lineTo(px - 38, py + 12); ctx.lineTo(px - 31, py + 22); ctx.lineTo(px - 14, py + 8); ctx.closePath(); ctx.fill();
   }
 
   function renderWorldGrid() {

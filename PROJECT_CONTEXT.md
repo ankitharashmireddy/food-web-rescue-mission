@@ -72,6 +72,8 @@ Implemented and browser-tested locally at `http://127.0.0.1:8123/`:
 
 - Warm woodland theme replaces the earlier dark green/black theme.
 - Redesigned the playable title and HUD to match the illustrated reference: woodland top navigation, framed mission panels, compact status cards, and touch movement controls.
+- Reworked the title scene as a layered illustrated grassland with mountains, river, trees, grass, clouds, and an Eco Guardian character.
+- Matched the title modal and world map framing to the reference's woodlands-and-gold presentation.
 - Asset folder structure added under `assets/`, with SVG diagrams/icons and inspiration images.
 - Extra food chains added as an Explorer learning module.
 - Six badges, including Perfect Score and Nature Saver.
