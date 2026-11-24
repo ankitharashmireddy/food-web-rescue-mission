@@ -18,7 +18,7 @@
     .hud-fill { height:100%; background:#2e7d32; }
     .game-panel { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(43,42,36,.55); z-index:10; }
     .game-panel.hidden { display:none; }
-    .panel-box { width:min(92vw,720px); max-height:88vh; overflow:auto; background:#fffaf0; border:2px solid #b9a57a; border-radius:18px; padding:20px; box-shadow:0 24px 60px rgba(83,63,38,.25); }
+    .panel-box { width:min(92vw,720px); max-height:88vh; overflow:auto; background:#fffaf0; border:3px solid #8b6b3f; border-radius:18px; padding:20px; box-shadow:0 24px 60px rgba(83,63,38,.25), inset 0 0 0 2px #f7f0e1; }
     .panel-box h2 { color:#2e7d32; margin-top:0; }
     .panel-box h3 { color:#4b3a2f; }
     .btn-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
@@ -58,8 +58,11 @@
         <div class="hud-bar"><div class="hud-fill" id="hudHealth" style="width:0%"></div></div>
       </div>
       <div class="hud-card" style="margin-left:auto;">
-        <button class="game-btn" id="pauseBtn">Pause</button>
-        <button class="game-btn" id="soundBtn">Sound</button>
+        <canvas id="miniMap" width="130" height="86" style="border:1px solid #b9a57a;border-radius:8px;background:#f7f0e1;"></canvas>
+        <div style="display:flex;gap:6px;margin-top:6px;">
+          <button class="game-btn" id="pauseBtn">Pause</button>
+          <button class="game-btn" id="soundBtn">Sound</button>
+        </div>
       </div>
     </div>
     <div id="controlsHint">Move: WASD / Arrow keys · Interact: E · Journal: J · Pause: P</div>

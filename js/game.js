@@ -377,6 +377,26 @@
     ctx.fillStyle = world.bg;
     ctx.fillRect(0, 0, 2400, 1600);
 
+    ctx.fillStyle = "rgba(46,125,50,0.06)";
+    for (let i = 0; i < 120; i++) {
+      const x = (i * 137) % 2400;
+      const y = (i * 97) % 1600;
+      ctx.fillRect(x, y, 2, 8);
+    }
+
+    for (let x = 120; x < 2400; x += 320) {
+      for (let y = 180; y < 1600; y += 360) {
+        ctx.fillStyle = "rgba(75,58,47,0.22)";
+        ctx.fillRect(x - 6, y - 40, 12, 80);
+        ctx.fillStyle = world.accent;
+        ctx.globalAlpha = 0.28;
+        ctx.beginPath();
+        ctx.arc(x, y - 70, 58, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
     ctx.fillStyle = "rgba(46,125,50,0.08)";
     for (let i = 0; i < 80; i++) {
       const x = (i * 137) % 2400;
@@ -384,17 +404,6 @@
       ctx.beginPath();
       ctx.arc(x, y, 2, 0, Math.PI * 2);
       ctx.fill();
-    }
-
-    for (let x = 80; x < 2400; x += 260) {
-      for (let y = 120; y < 1600; y += 300) {
-        ctx.fillStyle = world.accent;
-        ctx.globalAlpha = 0.18;
-        ctx.beginPath();
-        ctx.arc(x, y, 46, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      }
     }
 
     for (const org of world.organisms) {
@@ -433,17 +442,41 @@
     ctx.save();
     ctx.translate(p.x, p.y);
     ctx.scale(p.facing, 1);
+    ctx.fillStyle = "rgba(0,0,0,0.18)";
+    ctx.beginPath();
+    ctx.ellipse(0, 18, 18, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
     ctx.fillStyle = "#2e7d32";
     ctx.beginPath();
-    ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+    ctx.arc(0, 0, p.r + 2, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = "#fffaf0";
+    ctx.fillStyle = "#f7f0e1";
     ctx.beginPath();
-    ctx.arc(5, -4, 4, 0, Math.PI * 2);
+    ctx.arc(0, -2, p.r - 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#2b2a24";
+    ctx.beginPath();
+    ctx.arc(5, -4, 3, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
 
     ctx.restore();
+
+    const mini = document.getElementById("miniMap");
+    if (mini && state.world) {
+      const mctx = mini.getContext("2d");
+      mctx.clearRect(0, 0, mini.width, mini.height);
+      mctx.fillStyle = state.world.bg;
+      mctx.fillRect(0, 0, mini.width, mini.height);
+      const sx = mini.width / 2400;
+      const sy = mini.height / 1600;
+      for (const org of state.world.organisms) {
+        mctx.fillStyle = state.collected.has(org.id) ? "#b9a57a" : "#2e7d32";
+        mctx.fillRect(org.x * sx - 2, org.y * sy - 2, 4, 4);
+      }
+      mctx.fillStyle = "#c0392b";
+      mctx.fillRect(state.player.x * sx - 3, state.player.y * sy - 3, 6, 6);
+    }
 
     if (state.message) {
       ctx.fillStyle = state.messageTone === "positive" ? "rgba(46,125,50,0.92)" : "rgba(192,57,43,0.92)";
@@ -479,6 +512,16 @@
       ctx.arc((i * 137) % W, (i * 97) % H, 40 + (i % 5) * 20, 0, Math.PI * 2);
       ctx.fill();
     }
+    ctx.font = "24px Segoe UI Emoji, Apple Color Emoji, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (let i = 0; i < 14; i++) {
+      const x = ((i * 173 + state.time * (20 + i * 3)) % (W + 80)) - 40;
+      const y = (i * 97 + Math.sin(state.time + i) * 40 + H * 0.2) % H;
+      ctx.globalAlpha = 0.7;
+      ctx.fillText(i % 2 === 0 ? "🍃" : "🌿", x, y);
+    }
+    ctx.globalAlpha = 1;
   }
 
   function renderWorldGrid() {
