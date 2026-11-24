@@ -36,6 +36,7 @@
     health: 100,
     worldPhase: "explore",
     interactTarget: null,
+    scannerTarget: null,
     message: null,
     messageTimer: 0,
     chainSelection: [],
@@ -241,6 +242,7 @@
     else if (mode === "howto") showPanel("howToPanel");
     else if (mode === "map") { renderWorldGrid(); showPanel("mapPanel"); }
     else if (mode === "paused") showPanel("pausePanel");
+    else if (mode === "scanner") { renderScanner(); showPanel("scannerPanel"); }
     else if (mode === "journal") { renderJournal(); showPanel("journalPanel"); }
     else if (mode === "chain") { renderChain(); showPanel("chainPanel"); }
     else if (mode === "energy") { renderEnergy(); showPanel("energyPanel"); }
@@ -249,11 +251,27 @@
     else hidePanels();
   }
 
+  function updateObjective() {
+    const el = document.getElementById("hudObjective");
+    if (!el) return;
+    if (!state.world) { el.textContent = "Start adventure"; return; }
+    const labels = {
+      explore: "Discover all organisms",
+      journal: "Open Eco Journal (J)",
+      chain: "Build the food chain",
+      energy: "Solve energy challenge",
+      cascade: "Predict and rescue",
+      complete: "Mission complete",
+    };
+    el.textContent = labels[state.worldPhase] || "Explore";
+  }
+
   function updateHud() {
     document.getElementById("hudWorld").textContent = state.world ? state.world.name : "Title";
     document.getElementById("hudXp").textContent = state.xp;
     document.getElementById("hudBadges").textContent = state.badges.size;
     document.getElementById("hudHealth").style.width = Math.max(0, Math.min(100, state.health)) + "%";
+    updateObjective();
   }
 
   function startWorld(id) {
@@ -270,6 +288,7 @@
     state.inventory = [];
     state.health = 100;
     state.worldPhase = "explore";
+    updateObjective();
     state.chainSelection = [];
     state.energyAnswered = false;
     state.cascadeAnswered = false;
@@ -485,6 +504,24 @@
     });
   }
 
+  function renderScanner() {
+    const org = state.scannerTarget;
+    const title = document.getElementById("scannerTitle");
+    const content = document.getElementById("scannerContent");
+    const collectBtn = document.getElementById("collectBtn");
+    if (!org) return;
+    title.textContent = "Eco Scanner: " + org.name;
+    content.innerHTML = `
+      <div style="font-size:3rem;text-align:center;">${org.emoji}</div>
+      <p><strong>Trophic level:</strong> ${org.tier}</p>
+      <p><strong>Food:</strong> ${org.food}</p>
+      <p class="muted">Scan complete. This organism is part of the ${state.world.name} food web.</p>
+      ${state.collected.has(org.id) ? "<p class='message positive'>Already collected.</p>" : "<p class='message'>Collect this specimen for your Eco Journal.</p>"}
+    `;
+    collectBtn.disabled = state.collected.has(org.id);
+    collectBtn.textContent = state.collected.has(org.id) ? "Collected" : "Collect specimen";
+  }
+
   function renderJournal() {
     const content = document.getElementById("journalContent");
     if (!state.world) return;
@@ -582,6 +619,7 @@
           }, 900);
         } else {
           message.innerHTML = "<div class='message negative'>Not quite. " + state.world.energy.why + "</div>";
+          state.health = Math.max(0, state.health - 5);
           A.playWrong();
           state.energyAnswered = false;
         }
@@ -627,6 +665,7 @@
       }, 900);
     } else {
       message.innerHTML = "<div class='message negative'>Review the highlighted cascade and try again.</div>";
+      state.health = Math.max(0, state.health - 10);
       A.playWrong();
     }
   }
@@ -635,19 +674,10 @@
     state.keys[event.key] = true;
     if (event.key === "e" || event.key === "E") {
       if (state.mode === "playing" && state.interactTarget) {
-        const org = state.interactTarget;
-        if (!state.collected.has(org.id)) {
-          state.collected.add(org.id);
-          state.inventory.push(org);
-          state.xp += 10;
-          state.discovered.add(org.id);
-          setMessage("Discovered " + org.name + " +" + 10 + " XP", "positive");
-          A.playCorrect();
-          saveGame();
-        } else {
-          setMessage(org.name + " already discovered.", "");
-          A.playClick();
-        }
+        state.scannerTarget = state.interactTarget;
+        renderScanner();
+        setMode("scanner");
+        A.playClick();
       }
     }
     if (event.key === "j" || event.key === "J") {
@@ -658,7 +688,7 @@
       else if (state.mode === "paused") setMode("playing");
     }
     if (event.key === "Escape") {
-      if (state.mode === "journal" || state.mode === "chain" || state.mode === "energy" || state.mode === "cascade") setMode("playing");
+      if (state.mode === "journal" || state.mode === "chain" || state.mode === "energy" || state.mode === "cascade" || state.mode === "scanner") setMode("playing");
       else if (state.mode === "paused") setMode("playing");
       else if (state.mode === "howto") setMode("title");
       else if (state.mode === "map") setMode("title");
@@ -725,6 +755,28 @@
   });
 
   document.getElementById("journalClose").addEventListener("click", () => {
+    A.playClick();
+    setMode("playing");
+  });
+
+  document.getElementById("collectBtn").addEventListener("click", () => {
+    const org = state.scannerTarget;
+    if (!org || state.collected.has(org.id)) return;
+    state.collected.add(org.id);
+    state.inventory.push(org);
+    state.xp += 10;
+    state.discovered.add(org.id);
+    setMessage("Discovered " + org.name + " +" + 10 + " XP", "positive");
+    A.playCorrect();
+    saveGame();
+    renderScanner();
+    if (state.collected.size >= state.world.required.length && state.worldPhase === "explore") {
+      state.worldPhase = "journal";
+      setMessage("All organisms discovered. Open the Eco Journal (J).", "positive");
+    }
+  });
+
+  document.getElementById("scannerClose").addEventListener("click", () => {
     A.playClick();
     setMode("playing");
   });
