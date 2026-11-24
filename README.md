@@ -51,15 +51,15 @@ The dashboard and Settings → Skills let you add **any number of skills** (no f
 | File | Purpose |
 | --- | --- |
 | `index.html` | All nine screens, overlays, and script loading order |
-| `styles.css` | Design tokens, layout, components, responsive rules |
-| `data.js` | Single source of truth: organisms, links, cascade, topics, quizzes, badges |
-| `app.js` | State, Local Storage, navigation, audio, scoring helpers |
-| `web-canvas.js` | Reusable SVG food web with curved energy arrows |
-| `mission-web.js` | Mission 1 logic |
-| `mission-emergency.js` | Mission 2 logic |
-| `mission-energy.js` | Mission 3 logic |
-| `screen-dashboard.js`, `screen-pedia.js`, `screen-lesson.js`, `screen-explorer.js`, `screen-results.js` | Learning and reporting screens |
-| `skills.js`, `settings.js`, `boot.js` | Skills, settings modal, global events |
+| `css/styles.css` | Design tokens, layout, components, responsive rules |
+| `js/data.js` | Single source of truth: organisms, links, cascade, topics, quizzes, badges |
+| `js/app.js` | State, Local Storage, navigation, audio, scoring helpers |
+| `js/web-canvas.js` | Reusable SVG food web with curved energy arrows |
+| `js/missions/mission-web.js` | Mission 1 logic |
+| `js/missions/mission-emergency.js` | Mission 2 logic |
+| `js/missions/mission-energy.js` | Mission 3 logic |
+| `js/screens/screen-dashboard.js`, `js/screens/screen-pedia.js`, `js/screens/screen-lesson.js`, `js/screens/screen-explorer.js`, `js/screens/screen-results.js` | Learning and reporting screens |
+| `js/skills.js`, `js/settings.js`, `js/boot.js` | Skills, settings modal, global events |
 | `PROJECT_CONTEXT.md` | Living project context for future updates |
 | `.env`, `.env.example`, `.gitignore`, `requirements.txt` | Project configuration files |
 

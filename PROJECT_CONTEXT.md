@@ -24,7 +24,14 @@ Build a complete offline static website for Class 12 Biology (Ecosystem): a game
 Scripts load in dependency order at the end of `index.html`:
 
 ```
-data.js → app.js → skills.js → web-canvas.js → screen-*.js → mission-*.js → screen-results.js → settings.js → boot.js
+js/data.js → js/app.js → js/skills.js → js/web-canvas.js → js/screens/*.js → js/missions/*.js → js/screens/screen-results.js → js/settings.js → js/boot.js
+```
+
+Assets and styles:
+
+```
+css/styles.css
+assets/backgrounds, organisms, badges, diagrams, icons, ui, sounds, effects, fonts, inspiration
 ```
 
 - `window.FWR` — immutable content/rules (`data.js`).
