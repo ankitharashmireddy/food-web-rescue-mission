@@ -502,25 +502,31 @@
 
   function drawTitleBackground() {
     const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#f4efe3");
-    g.addColorStop(1, "#e8f3e8");
+    g.addColorStop(0, "#74c8e8");
+    g.addColorStop(0.42, "#cceba5");
+    g.addColorStop(1, "#63a94f");
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = "rgba(46,125,50,0.12)";
-    for (let i = 0; i < 18; i++) {
-      ctx.beginPath();
-      ctx.arc((i * 137) % W, (i * 97) % H, 40 + (i % 5) * 20, 0, Math.PI * 2);
-      ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.78)";
+    for (let i = 0; i < 8; i++) {
+      const x = (i * 211 + 100) % (W + 100);
+      const y = 55 + (i % 3) * 24;
+      ctx.beginPath(); ctx.arc(x, y, 26, 0, Math.PI * 2); ctx.arc(x + 28, y - 8, 34, 0, Math.PI * 2); ctx.arc(x + 58, y, 24, 0, Math.PI * 2); ctx.fill();
     }
-    ctx.font = "24px Segoe UI Emoji, Apple Color Emoji, sans-serif";
+    ctx.fillStyle = "rgba(87,139,72,.58)";
+    ctx.beginPath();
+    ctx.moveTo(0, H * .50); ctx.quadraticCurveTo(W * .18,H*.34,W*.38,H*.53); ctx.quadraticCurveTo(W*.62,H*.30,W*.82,H*.52); ctx.quadraticCurveTo(W*.92,H*.42,W,H*.48); ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.fill();
+    ctx.fillStyle = "#6bb85d";
+    ctx.beginPath(); ctx.moveTo(0,H*.58);ctx.quadraticCurveTo(W*.22,H*.44,W*.43,H*.60);ctx.quadraticCurveTo(W*.68,H*.44,W,H*.56);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
+    ctx.fillStyle = "rgba(126,177,83,.38)";
+    for (let i=0;i<18;i++){ctx.beginPath();ctx.arc((i*173)%W,H*.82+(i%4)*18,70+(i%3)*18,0,Math.PI*2);ctx.fill();}
+    ctx.font = "54px Segoe UI Emoji, Apple Color Emoji, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    for (let i = 0; i < 14; i++) {
-      const x = ((i * 173 + state.time * (20 + i * 3)) % (W + 80)) - 40;
-      const y = (i * 97 + Math.sin(state.time + i) * 40 + H * 0.2) % H;
-      ctx.globalAlpha = 0.7;
-      ctx.fillText(i % 2 === 0 ? "🍃" : "🌿", x, y);
-    }
+    ctx.fillText("🌳",(W*.08),(H*.48)); ctx.fillText("🌳",(W*.92),(H*.43));
+    ctx.fillText("🦅",(W*.72),(H*.25));
+    ctx.globalAlpha=.75; ctx.font="28px Segoe UI Emoji, Apple Color Emoji, sans-serif";
+    for(let i=0;i<10;i++)ctx.fillText(i%2?"🌿":"🍃",(i*157+70)%W,H*.67+(i%3)*38);
     ctx.globalAlpha = 1;
   }
 
@@ -771,6 +777,42 @@
     A.unlockAudio();
     if (state.mode === "playing") setMode("paused");
   });
+  document.getElementById("pauseBtnTop").addEventListener("click", () => {
+    A.unlockAudio();
+    if (state.mode === "playing") setMode("paused");
+  });
+  document.getElementById("helpBtn").addEventListener("click", () => {
+    A.unlockAudio();
+    A.playClick();
+    setMode("howto");
+  });
+  document.getElementById("navWorld").addEventListener("click", () => {
+    A.playClick();
+    setMode("map");
+  });
+  document.getElementById("navJournal").addEventListener("click", () => {
+    A.playClick();
+    if (state.world) setMode("journal");
+  });
+  document.getElementById("navChain").addEventListener("click", () => {
+    A.playClick();
+    if (state.world) { state.chainSelection = []; setMode("chain"); }
+  });
+  document.getElementById("navResult").addEventListener("click", () => {
+    A.playClick();
+    setMode("map");
+  });
+
+  document.querySelectorAll(".touch-controls [data-key]").forEach((button) => {
+    const key = button.dataset.key;
+    const press = (event) => { event.preventDefault(); state.keys[key] = true; };
+    const release = (event) => { event.preventDefault(); state.keys[key] = false; };
+    button.addEventListener("touchstart", press, { passive:false });
+    button.addEventListener("touchend", release, { passive:false });
+    button.addEventListener("mousedown", press);
+    button.addEventListener("mouseup", release);
+    button.addEventListener("mouseleave", release);
+  });
 
   document.getElementById("soundBtn").addEventListener("click", () => {
     A.state.settings.audio = !A.state.settings.audio;
@@ -865,6 +907,37 @@
   document.getElementById("victoryContinue").addEventListener("click", () => {
     A.playClick();
     setMode("map");
+  });
+
+  const helpBtn = document.getElementById("helpBtn");
+  if (helpBtn) helpBtn.addEventListener("click", () => { A.unlockAudio(); A.playClick(); setMode("howto"); });
+
+  const pauseBtnTop = document.getElementById("pauseBtnTop");
+  if (pauseBtnTop) pauseBtnTop.addEventListener("click", () => {
+    A.unlockAudio();
+    if (state.mode === "playing") setMode("paused");
+    else if (state.mode === "paused") setMode("playing");
+  });
+
+  const navWorld = document.getElementById("navWorld");
+  if (navWorld) navWorld.addEventListener("click", () => { A.unlockAudio(); A.playClick(); if (state.world) setMode("playing"); else setMode("map"); });
+
+  const navJournal = document.getElementById("navJournal");
+  if (navJournal) navJournal.addEventListener("click", () => { A.unlockAudio(); A.playClick(); if (state.world) setMode("journal"); });
+
+  const navChain = document.getElementById("navChain");
+  if (navChain) navChain.addEventListener("click", () => { A.unlockAudio(); A.playClick(); if (state.world) { state.chainSelection = []; setMode("chain"); } });
+
+  const navResult = document.getElementById("navResult");
+  if (navResult) navResult.addEventListener("click", () => { A.unlockAudio(); A.playClick(); setMode("map"); });
+
+  document.querySelectorAll(".touch-controls button").forEach((btn) => {
+    const key = btn.dataset.key;
+    btn.addEventListener("touchstart", (e) => { e.preventDefault(); state.keys[key] = true; });
+    btn.addEventListener("touchend", (e) => { e.preventDefault(); state.keys[key] = false; });
+    btn.addEventListener("mousedown", () => { state.keys[key] = true; });
+    btn.addEventListener("mouseup", () => { state.keys[key] = false; });
+    btn.addEventListener("mouseleave", () => { state.keys[key] = false; });
   });
 
   A.init();

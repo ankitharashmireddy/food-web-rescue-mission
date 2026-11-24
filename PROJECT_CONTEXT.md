@@ -71,6 +71,7 @@ Difficulty affects Mission 1 hints only: guided ∞, standard 3, expert 0.
 Implemented and browser-tested locally at `http://127.0.0.1:8123/`:
 
 - Warm woodland theme replaces the earlier dark green/black theme.
+- Redesigned the playable title and HUD to match the illustrated reference: woodland top navigation, framed mission panels, compact status cards, and touch movement controls.
 - Asset folder structure added under `assets/`, with SVG diagrams/icons and inspiration images.
 - Extra food chains added as an Explorer learning module.
 - Six badges, including Perfect Score and Nature Saver.
@@ -91,6 +92,7 @@ Configuration files exist: `.env`, `.env.example`, `.gitignore`, `requirements.t
 - The food-web canvas has `min-width: 720px`; on narrow screens the canvas panel scrolls horizontally by design.
 - Web Audio starts only after the first user gesture (browser autoplay policy).
 - Language setting currently has one option (English); UI text is not translated.
+- The playable canvas engine is separate from the earlier nine-screen web UI and remains available in `index.html`; keyboard and touch movement are supported.
 
 ## 6. Next steps / maintenance checklist
 

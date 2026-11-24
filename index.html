@@ -7,41 +7,79 @@
   <title>Food Web Rescue Mission – Ecosystem Guardian</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    html, body { margin:0; height:100%; overflow:hidden; background:#f4efe3; }
+    :root { --green:#2f7d32; --green-dark:#1d5923; --cream:#fff9df; --gold:#efb82f; --wood:#6a3d19; --red:#c83c32; }
+    html, body { margin:0; height:100%; overflow:hidden; background:#9ed4df; }
     #gameRoot { position:fixed; inset:0; }
     #gameCanvas { display:block; width:100%; height:100%; }
-    .game-hud { position:absolute; top:12px; left:12px; right:12px; display:flex; gap:10px; align-items:center; z-index:5; pointer-events:none; }
-    .hud-card { background:rgba(255,250,240,.92); border:1px solid #b9a57a; border-radius:12px; padding:8px 12px; box-shadow:0 8px 24px rgba(83,63,38,.15); pointer-events:auto; }
-    .hud-title { font-weight:800; color:#2e7d32; }
-    .hud-row { display:flex; gap:12px; flex-wrap:wrap; font-size:.9rem; }
-    .hud-bar { width:120px; height:10px; background:#eee4cc; border-radius:999px; overflow:hidden; border:1px solid #b9a57a; }
-    .hud-fill { height:100%; background:#2e7d32; }
-    .game-panel { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(43,42,36,.55); z-index:10; }
+    .topbar { position:absolute; z-index:7; top:0; left:0; right:0; height:70px; display:flex; align-items:center; padding:7px 16px 7px 28px; color:white; background:linear-gradient(180deg,rgba(35,80,49,.94),rgba(41,91,57,.82)); border-bottom:3px solid rgba(255,255,255,.38); box-shadow:0 5px 18px rgba(20,55,43,.24); pointer-events:auto; }
+    .brand { display:flex; align-items:center; gap:10px; min-width:max-content; }
+    .brand-mark { width:54px; height:54px; display:grid; place-items:center; border-radius:50%; background:rgba(255,255,255,.16); border:2px solid rgba(255,255,255,.7); font-size:30px; }
+    .brand-title { font-family:Georgia,serif; font-weight:900; line-height:.82; text-shadow:0 3px 0 #7a4e1c,0 4px 8px rgba(0,0,0,.3); font-size:23px; }
+    .brand-title span { color:#ffe45c; }
+    .nav-tabs { margin:auto; display:flex; gap:14px; font-family:Georgia,serif; font-size:17px; font-weight:800; }
+    .nav-tabs button { border:0; background:none; color:white; text-shadow:0 2px 3px rgba(0,0,0,.35); cursor:pointer; }
+    .top-actions { display:flex; gap:7px; }
+    .round-btn { width:42px; height:42px; border-radius:50%; border:2px solid rgba(255,255,255,.8); background:rgba(20,67,44,.55); color:white; font-weight:900; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,.18); }
+    .game-hud { position:absolute; top:82px; left:18px; right:18px; display:flex; gap:10px; align-items:flex-start; z-index:5; pointer-events:none; }
+    .hud-card { background:rgba(255,250,226,.95); border:2px solid rgba(74,113,65,.68); border-radius:12px; padding:7px 10px; box-shadow:0 8px 20px rgba(40,74,49,.20); pointer-events:auto; color:#263327; }
+    .hud-title { font-weight:900; color:var(--green-dark); }
+    .hud-row { display:flex; gap:12px; flex-wrap:wrap; font-size:.82rem; }
+    .objective-card { margin-left:auto; min-width:230px; border-color:#d8a52c; }
+    .objective-card strong { color:var(--green-dark); }
+    .hud-bar { width:120px; height:12px; background:#ece4c2; border-radius:999px; overflow:hidden; border:1px solid #9aae72; }
+    .hud-fill { height:100%; background:linear-gradient(90deg,#8bc34a,#2f7d32); }
+    .mini-card { align-self:flex-start; }
+    #miniMap { border:2px solid #8ba55e!important; border-radius:8px!important; background:#dff1ca!important; }
+    .game-panel { position:absolute; inset:70px 0 0; display:flex; align-items:center; justify-content:center; background:rgba(28,63,61,.48); z-index:10; backdrop-filter:blur(2px); }
     .game-panel.hidden { display:none; }
-    .panel-box { width:min(92vw,720px); max-height:88vh; overflow:auto; background:#fffaf0; border:3px solid #8b6b3f; border-radius:18px; padding:20px; box-shadow:0 24px 60px rgba(83,63,38,.25), inset 0 0 0 2px #f7f0e1; }
-    .panel-box h2 { color:#2e7d32; margin-top:0; }
+    .panel-box { width:min(92vw,760px); max-height:82vh; overflow:auto; background:linear-gradient(180deg,#fffdf0,#fff6d2); border:4px solid #fff; outline:3px solid #709b51; border-radius:18px; padding:20px; box-shadow:0 20px 50px rgba(22,57,42,.35); }
+    .panel-box h2 { color:var(--green-dark); margin-top:0; text-align:center; }
     .panel-box h3 { color:#4b3a2f; }
-    .btn-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-    .game-btn { border:1px solid #b9a57a; background:#fffaf0; color:#2b2a24; border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer; }
-    .game-btn.primary { background:#2e7d32; color:#fffaf0; border-color:#1f5e24; }
-    .game-btn.danger { background:#c0392b; color:#fffaf0; border-color:#962d22; }
-    .organism-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:10px 0; }
-    .org-card { border:1px solid #d6c7a1; border-radius:10px; padding:8px; text-align:center; background:#f7f0e1; }
-    .chain-slots { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
-    .slot { min-width:90px; min-height:40px; border:2px dashed #b9a57a; border-radius:10px; display:flex; align-items:center; justify-content:center; padding:6px; background:#fffaf0; }
-    .slot.filled { border-style:solid; background:#e8f3e8; }
-    .org-btn { border:1px solid #b9a57a; background:#fffaf0; border-radius:8px; padding:6px 10px; cursor:pointer; }
-    .message { padding:10px; border-radius:10px; background:#f7f0e1; margin:8px 0; }
-    .message.positive { background:#e8f3e8; color:#1f5e24; }
-    .message.negative { background:#fdecea; color:#962d22; }
-    #controlsHint { position:absolute; bottom:12px; left:12px; z-index:5; background:rgba(255,250,240,.9); border:1px solid #b9a57a; border-radius:10px; padding:8px 10px; font-size:.85rem; }
+    .btn-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; justify-content:center; }
+    .game-btn { border:2px solid #7f9b63; background:linear-gradient(#fffdf1,#f1e7bd); color:#263327; border-radius:10px; padding:10px 16px; font-weight:800; cursor:pointer; box-shadow:0 4px 0 #9aaf7c; }
+    .game-btn.primary { background:linear-gradient(#66b83b,#378f31); color:white; border-color:#27732b; box-shadow:0 4px 0 #1d5d24; }
+    .game-btn.danger { background:var(--red); color:white; border-color:#962d22; }
+    .organism-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(125px,1fr)); gap:10px; margin:10px 0; }
+    .org-card { border:2px solid #d1bd78; border-radius:12px; padding:10px; text-align:center; background:rgba(255,255,255,.78); box-shadow:inset 0 0 12px rgba(171,142,71,.12); }
+    .chain-slots { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:12px 0; }
+    .slot { min-width:108px; min-height:48px; border:2px dashed #91a96d; border-radius:10px; display:flex; align-items:center; justify-content:center; padding:6px; background:#fffdf2; }
+    .slot.filled { border-style:solid; background:#edf7df; }
+    .org-btn { border:2px solid #d1bd78; background:#fffdf2; border-radius:10px; padding:8px 12px; cursor:pointer; }
+    .message { padding:10px; border-radius:10px; background:#f4edc9; margin:8px 0; }
+    .message.positive { background:#e1f3d2; color:#1f5e24; border:1px solid #73a75c; }
+    .message.negative { background:#fde0dc; color:#962d22; border:1px solid #d17469; }
+    #controlsHint { position:absolute; bottom:12px; left:12px; z-index:5; background:rgba(255,250,226,.92); border:2px solid #93a66c; border-radius:10px; padding:7px 10px; font-size:.78rem; }
+    .touch-controls { display:none; position:absolute; z-index:6; left:16px; bottom:18px; width:150px; height:150px; pointer-events:none; }
+    .touch-controls button { position:absolute; width:48px; height:48px; border-radius:50%; border:2px solid white; background:rgba(34,96,55,.75); color:white; font-size:20px; pointer-events:auto; box-shadow:0 4px 10px rgba(0,0,0,.2); }
+    .touch-controls .up{left:51px;top:0}.touch-controls .down{left:51px;bottom:0}.touch-controls .left{left:0;top:51px}.touch-controls .right{right:0;top:51px}
+    #titlePanel { background:linear-gradient(90deg,rgba(28,72,59,.25),rgba(28,72,59,.05)), radial-gradient(circle at 20% 30%,rgba(255,229,137,.28),transparent 30%); }
+    #titlePanel .panel-box { width:min(90vw,560px); border-color:#fff4b0; outline:4px solid #7b5423; background:rgba(255,250,224,.94); }
+    #titlePanel h1 { font-family:Georgia,serif; font-size:42px; text-shadow:0 3px 0 #fff,0 5px 10px rgba(78,76,37,.16); }
+    #titlePanel h2 { color:#df9e22!important; font-family:Georgia,serif; }
+    @media (max-width:800px) { .topbar{height:58px;padding-left:8px}.brand-mark{width:42px;height:42px;font-size:22px}.brand-title{font-size:17px}.nav-tabs{display:none}.game-hud{top:68px;left:8px;right:8px}.mini-card{display:none}.objective-card{display:none}.touch-controls{display:block}#controlsHint{display:none}.panel-box{max-height:78vh}.game-panel{inset:58px 0 0} }
   </style>
 </head>
 <body>
   <div id="gameRoot">
     <canvas id="gameCanvas"></canvas>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">🌿</div>
+        <div class="brand-title">Food Web <span>Rescue Mission</span></div>
+      </div>
+      <nav class="nav-tabs" aria-label="Game sections">
+        <button type="button" id="navWorld">Explore</button>
+        <button type="button" id="navJournal">Discover</button>
+        <button type="button" id="navChain">Rebuild</button>
+        <button type="button" id="navResult">Restore</button>
+      </nav>
+      <div class="top-actions">
+        <button class="round-btn" type="button" id="helpBtn" aria-label="How to play">?</button>
+        <button class="round-btn" type="button" id="pauseBtnTop" aria-label="Pause">Ⅱ</button>
+      </div>
+    </header>
     <div class="game-hud">
-      <div class="hud-card">
+      <div class="hud-card" style="min-width:150px;">
         <div class="hud-title">Eco Guardian</div>
         <div class="hud-row">
           <span>World: <strong id="hudWorld">Title</strong></span>
@@ -49,23 +87,29 @@
           <span>Badges: <strong id="hudBadges">0</strong></span>
         </div>
       </div>
-      <div class="hud-card" style="min-width:220px;">
-        <div>Mission objective</div>
-        <div id="hudObjective" style="font-weight:700;color:#2e7d32;">Explore the world</div>
+      <div class="hud-card objective-card">
+        <div>🎯 Mission objective</div>
+        <strong id="hudObjective">Explore the world</strong>
       </div>
       <div class="hud-card">
-        <div>Ecosystem stability</div>
+        <div>❤ Ecosystem stability</div>
         <div class="hud-bar"><div class="hud-fill" id="hudHealth" style="width:0%"></div></div>
       </div>
-      <div class="hud-card" style="margin-left:auto;">
+      <div class="hud-card mini-card" style="margin-left:auto;">
         <canvas id="miniMap" width="130" height="86" style="border:1px solid #b9a57a;border-radius:8px;background:#f7f0e1;"></canvas>
         <div style="display:flex;gap:6px;margin-top:6px;">
-          <button class="game-btn" id="pauseBtn">Pause</button>
-          <button class="game-btn" id="soundBtn">Sound</button>
+          <button class="game-btn" id="pauseBtn">Ⅱ</button>
+          <button class="game-btn" id="soundBtn">🔊</button>
         </div>
       </div>
     </div>
     <div id="controlsHint">Move: WASD / Arrow keys · Interact: E · Journal: J · Pause: P</div>
+    <div class="touch-controls" aria-label="Touch movement controls">
+      <button class="up" type="button" data-key="ArrowUp">▲</button>
+      <button class="down" type="button" data-key="ArrowDown">▼</button>
+      <button class="left" type="button" data-key="ArrowLeft">◀</button>
+      <button class="right" type="button" data-key="ArrowRight">▶</button>
+    </div>
 
     <div class="game-panel" id="titlePanel">
       <div class="panel-box" style="text-align:center;">
