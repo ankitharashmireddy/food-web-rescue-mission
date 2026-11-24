@@ -1,2 +1,2 @@
-# No Python dependencies. This is a static HTML/CSS/JavaScript project.
+# This is a static HTML/CSS/JavaScript project.
 # This file is kept for project-configuration consistency only.

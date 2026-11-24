@@ -1,6 +1,14 @@
 # Food Web Rescue Mission
 
-An offline, browser-based Class 12 Biology learning game for the **Ecosystem** chapter. Students rebuild a grassland food web, predict a trophic cascade after a snake is removed, and apply Lindeman's 10% law.
+A playable offline HTML5 Canvas adventure game for Class 11/12 Biology. Explore ecosystems, discover organisms, rebuild food chains, solve energy puzzles and restore ecosystem stability.
+
+## How to play
+
+- Move with WASD or arrow keys.
+- Press E near an organism to discover it.
+- Press J to open the Eco Journal.
+- Press P to pause.
+- Complete the food-chain, energy and ecosystem-rescue challenges in each world.
 
 ## Quick start
 

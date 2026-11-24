@@ -1,0 +1,16 @@
+{
+  "project": "Food Web Rescue Mission - Ecosystem Guardian",
+  "generated": "2026-11-24",
+  "assets": [
+    { "path": "css/styles.css", "type": "stylesheet", "purpose": "Game UI and layout" },
+    { "path": "js/data.js", "type": "script", "purpose": "Biology content and rules" },
+    { "path": "js/app.js", "type": "script", "purpose": "Shared state and helpers" },
+    { "path": "js/web-canvas.js", "type": "script", "purpose": "SVG food-web renderer" },
+    { "path": "assets/diagrams/*.svg", "type": "diagram", "purpose": "Educational diagrams" },
+    { "path": "assets/icons/*.svg", "type": "icon", "purpose": "Interface icons" },
+    { "path": "assets/inspiration/*", "type": "reference", "purpose": "Source inspiration, not runtime assets" }
+  ],
+  "runtimeImages": "none-required",
+  "audio": "Web Audio API generated",
+  "fonts": "system fonts"
+}
